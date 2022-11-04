@@ -1,0 +1,7 @@
+apiVersion: nginx.my.domain/v1
+kind: Nginx
+metadata:
+  name: nginx-3
+spec:
+  replicas: 2
+  serviceType: LoadBalancer

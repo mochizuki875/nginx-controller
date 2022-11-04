@@ -1,0 +1,83 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.9.2
+  creationTimestamp: null
+  name: nginxes.nginx.my.domain
+spec:
+  group: nginx.my.domain
+  names:
+    kind: Nginx
+    listKind: NginxList
+    plural: nginxes
+    shortNames:
+    - ng
+    singular: nginx
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.availableReplicas
+      name: Replicas
+      type: integer
+    - jsonPath: .status.serviceName
+      name: Service_Name
+      type: string
+    - jsonPath: .status.clusterIP
+      name: Cluster-IP
+      type: string
+    - jsonPath: .status.externalIP
+      name: External-IP
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Nginx is the Schema for the nginxes API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: NginxSpec defines the desired state of Nginx
+            properties:
+              replicas:
+                format: int32
+                type: integer
+              serviceType:
+                description: Service Type string describes ingress methods for a service
+                type: string
+            type: object
+          status:
+            description: NginxStatus defines the observed state of Nginx
+            properties:
+              availableReplicas:
+                format: int32
+                type: integer
+              clusterIP:
+                type: string
+              deploymentName:
+                type: string
+              externalIP:
+                type: string
+              serviceName:
+                type: string
+            required:
+            - availableReplicas
+            - deploymentName
+            - serviceName
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

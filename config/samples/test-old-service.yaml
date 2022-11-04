@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nginx-1-old
+  namespace: default
+  ownerReferences:
+  - apiVersion: nginx.my.domain/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Nginx
+    name: nginx-1
+    uid: 37bcf643-abe7-4767-887c-c4a0606ee3dd
+  resourceVersion: "132844"
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+    controller: nginx-1
