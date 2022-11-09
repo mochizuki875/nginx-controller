@@ -234,6 +234,12 @@ func (r *NginxReconciler) cleanupOwnerResources(ctx context.Context, log logr.Lo
 //+kubebuilder:rbac:groups=nginx.my.domain,resources=nginxes,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=nginx.my.domain,resources=nginxes/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=nginx.my.domain,resources=nginxes/finalizers,verbs=update
+//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;update;patch
+//+kubebuilder:rbac:groups=apps,resources=deployments/finalizers,verbs=update
+//+kubebuilder:rbac:groups=core,resources=services,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=apps,resources=services/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=apps,resources=services/finalizers,verbs=update
 
 // reconcile.Reconcileインターフェイスを実装
 // https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile

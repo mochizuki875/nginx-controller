@@ -1,0 +1,9 @@
+apiVersion: nginx.my.domain/v1
+kind: Nginx
+metadata:
+  annotations:
+    nginx: nginx-1
+  name: nginx-1
+  namespace: default
+spec:
+  replicas: 3
